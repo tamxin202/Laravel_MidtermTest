@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/get-product',[PageAPIController::class, 'getProducts']);
 Route::get('/get-product/{id}',[PageAPIController::class,'getOneProduct']);
 Route::get('vegetable',[PageAPIController::class, 'search']);
+Route::get('/get-food-by-keyword',[PageAPIController::class,'searchfoods']);
 

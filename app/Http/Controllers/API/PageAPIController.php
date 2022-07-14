@@ -19,6 +19,19 @@ class PageAPIController extends Controller
     $product = Product::find($id);
     return response()->json($product);
     }
+
+    public function searchfoods(Request $request)
+    {
+        if($request->keyword == null)
+        {
+            return DB::table('products')->get();
+        }
+        $result = DB::table('products')
+                ->where('name', 'like', "%$request->keyword%")
+                ->get();
+        return $result;
+    }
+
     public function search(Request $request){
 
         $query = DB::table('products')->whereBetween('unit_price', [$request->min, $request->max])
@@ -27,15 +40,6 @@ class PageAPIController extends Controller
 
         return response()->json(["data"=>$query]);
     }
-    public function countData(Request $request){
-        
-        $query = DB::table('products')
-        ->join('categoris','categoris.id','=','products.category_id')
-        ->groupBy('category_id')
-        // ->selectRaw('count(*) as total', 'category_id')
-        ->selectRaw('categoris.*, count(products.category_id) as RoomsCount')
-        ->get();
-        return response()->json(["data"=>$query]);
-    }
-    //
+    
+    
 }

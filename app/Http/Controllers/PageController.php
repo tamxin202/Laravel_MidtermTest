@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function index(){
         $product = Product :: all();
-        // return view('show', compact('new'));
+        
         return view('trangchu',compact('product'));
     }
     public function formAdd(){
@@ -18,7 +18,6 @@ class PageController extends Controller
     }
     public function getIndex(){
         $product = Product :: all();
-        // return view('show', compact('new'));
         return view('Show');
     }
     public function postAdminAdd(FormInputRequest $request){
